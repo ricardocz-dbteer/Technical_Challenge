@@ -1,0 +1,37 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs24 \cf0 \expnd0\expndtw0\kerning0
+WITH customer_info AS (\
+    SELECT\
+        user_id,\
+        acquisition_date,\
+        acquisition_cost,\
+        channel,\
+        risk_band_production,\
+        city,\
+        state\
+    FROM CUSTOMER\
+),\
+payments_info AS (\
+    SELECT\
+        user_id,\
+        amount_trans,\
+        event_date\
+    FROM PAYMENTS\
+)\
+\
+SELECT \
+    c.user_id,\
+    c.acquisition_date,\
+    c.channel,\
+    p.event_date AS payment_date,\
+    p.amount_trans\
+FROM customer_info c\
+LEFT JOIN payments_info p \
+  ON c.user_id = p.user_id}
